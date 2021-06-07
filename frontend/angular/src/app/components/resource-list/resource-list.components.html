@@ -1,0 +1,55 @@
+<div class="list row">
+    <div class="col-md-6">
+        <h4>Resources List</h4>
+        <ul class="list-group">
+            <li
+                    class="list-group-item"
+                    *ngFor="let resource of resources; let i = index"
+                    [class.active]="i == currentIndex"
+                    (click)="setSelected(resource, i)">
+
+                {{ resource.name }}
+            </li>
+        </ul>
+
+        <div *ngIf="!resources || resources.length == 0">
+            List is empty <a routerLink="/form">add new Resource</a>
+        </div>
+
+        <a *ngIf="resources && resources.length > 0" class="btn btn-link" routerLink="/form">
+            Add new Resource
+        </a>
+    </div>
+    <div class="col-md-6">
+        <div *ngIf="selected">
+            <h4>Details</h4>
+            <div>
+                <label><strong>Name:</strong></label> {{ selected.name }}
+            </div>
+            <div>
+                <label><strong>Description:</strong></label>
+                {{ selected.description }}
+            </div>
+            <div>
+                <label><strong>Size:</strong></label> {{ selected.size }}
+            </div>
+            <div>
+                <label><strong>Created:</strong></label>
+                {{ toDate(selected.createdDate) + " by " + selected.createdBy}}
+            </div>
+            <div>
+                <label><strong>Active:</strong></label> {{ selected.active }}
+            </div>
+
+            <a class="btn btn-sm btn-secondary mr-2" routerLink="/form/{{ selected.id }}">
+                Edit
+            </a>
+
+            <button class="btn btn-sm btn-danger mr-2" (click)="deleteResource()">
+                Delete
+            </button>
+        </div>
+
+        <p>{{ message }}</p>
+    </div>
+</div>

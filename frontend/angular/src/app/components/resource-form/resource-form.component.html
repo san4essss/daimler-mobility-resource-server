@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="edit-form col-md-6">
+        <h4>{{resource.id ? 'Edit Resource' : 'Create new Resource'}}</h4>
+        <form>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        id="description"
+                        [(ngModel)]="resource.description"
+                        name="description"
+                />
+            </div>
+            <div class="form-group">
+                <label for="active">Active</label>
+                <input
+                        type="checkbox"
+                        class="checkbox"
+                        id="active"
+                        [(ngModel)]="resource.active"
+                        name="active"
+                />
+            </div>
+            <div class="form-group">
+                <input type="file" name="resourceFile" (change)="onFileSelect($event)" />
+            </div>
+
+        </form>
+
+        <button class="btn btn-secondary mr-2" routerLink="/resources">
+            << Go Back
+        </button>
+
+        <button type="submit"
+                class="btn btn-success"
+                *ngIf="resource.file || resource.id"
+                (click)="saveResource()">
+            Save
+        </button>
+    </div>
+</div>
